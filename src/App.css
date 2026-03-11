@@ -1,0 +1,511 @@
+/* ============================================
+   App Layout Styles
+   ============================================ */
+
+.app {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--space-lg);
+  padding-bottom: var(--space-3xl);
+}
+
+/* --- Header --- */
+.header {
+  text-align: center;
+  padding: var(--space-2xl) 0 var(--space-xl);
+  animation: fadeInUp 0.6s ease;
+  max-width: 600px;
+}
+
+.logo {
+  font-size: 2.5rem;
+  margin-bottom: var(--space-sm);
+}
+
+.title {
+  font-size: clamp(1.75rem, 5vw, 2.5rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  background: linear-gradient(135deg, var(--text-primary), var(--accent));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.subtitle {
+  font-size: clamp(0.875rem, 2.5vw, 1.05rem);
+  color: var(--text-secondary);
+  margin-top: var(--space-sm);
+  line-height: 1.5;
+}
+
+/* --- Main Content --- */
+.main {
+  width: 100%;
+  max-width: 640px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  animation: fadeInUp 0.6s ease 0.15s both;
+}
+
+/* --- Diagnose Button --- */
+.diagnoseSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.diagnoseBtn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  width: 100%;
+  max-width: 400px;
+  padding: var(--space-md) var(--space-xl);
+  font-family: var(--font-primary);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--bg-primary);
+  background: linear-gradient(135deg, var(--accent), var(--accent-dim));
+  border: none;
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  overflow: hidden;
+  transition: all var(--transition-normal);
+  box-shadow: 0 4px 20px rgba(56, 189, 248, 0.3);
+  min-height: 56px;
+}
+
+.diagnoseBtn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(56, 189, 248, 0.4);
+}
+
+.diagnoseBtn:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.diagnoseBtn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.diagnoseBtn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg,
+      transparent,
+      rgba(255, 255, 255, 0.15),
+      transparent);
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+  opacity: 0;
+  transition: opacity var(--transition-normal);
+}
+
+.diagnoseBtn:not(:disabled)::after {
+  opacity: 1;
+}
+
+.diagnoseBtnRunning {
+  background: linear-gradient(135deg, var(--bg-elevated), var(--bg-card));
+  color: var(--accent);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.diagnoseBtnRunning::after {
+  opacity: 0 !important;
+}
+
+.btnIcon {
+  font-size: 1.3rem;
+  flex-shrink: 0;
+}
+
+.spinner {
+  width: 20px;
+  height: 20px;
+  border: 2.5px solid currentColor;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  flex-shrink: 0;
+}
+
+/* --- Progress Section --- */
+.progressSection {
+  width: 100%;
+  max-width: 400px;
+  animation: fadeIn 0.3s ease;
+}
+
+.progressBar {
+  width: 100%;
+  height: 6px;
+  background: var(--bg-elevated);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  margin-bottom: var(--space-sm);
+}
+
+.progressFill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent-dim), var(--accent));
+  border-radius: var(--radius-full);
+  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.phaseLabel {
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  animation: pulse 1.5s ease infinite;
+}
+
+/* --- Results Section --- */
+.resultsSection {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+/* --- Verdict Banner --- */
+.verdict {
+  padding: var(--space-lg);
+  border-radius: var(--radius-xl);
+  border: 1px solid;
+  animation: fadeInUp 0.5s ease;
+  text-align: center;
+}
+
+.verdictGood {
+  background: var(--color-good-bg);
+  border-color: var(--color-good-border);
+}
+
+.verdictDegraded {
+  background: var(--color-warn-bg);
+  border-color: var(--color-warn-border);
+}
+
+.verdictBad {
+  background: var(--color-bad-bg);
+  border-color: var(--color-bad-border);
+}
+
+.verdictOffline {
+  background: var(--color-offline-bg);
+  border-color: var(--color-offline-border);
+}
+
+.verdictIcon {
+  font-size: 2.5rem;
+  margin-bottom: var(--space-sm);
+}
+
+.verdictHeadline {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: var(--space-xs);
+}
+
+.verdictGood .verdictHeadline {
+  color: var(--color-good);
+}
+
+.verdictDegraded .verdictHeadline {
+  color: var(--color-warn);
+}
+
+.verdictBad .verdictHeadline {
+  color: var(--color-bad);
+}
+
+.verdictOffline .verdictHeadline {
+  color: var(--color-offline);
+}
+
+.verdictDescription {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* --- Recommendations --- */
+.recommendations {
+  margin-top: var(--space-md);
+  text-align: left;
+}
+
+.recommendationsTitle {
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  margin-bottom: var(--space-sm);
+}
+
+.recommendationItem {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-sm);
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  padding: var(--space-xs) 0;
+}
+
+.recommendationBullet {
+  flex-shrink: 0;
+}
+
+/* --- Test Result Cards --- */
+.testCards {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.testCard {
+  background: var(--bg-card);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  animation: fadeInUp 0.4s ease both;
+}
+
+.testCard:nth-child(1) {
+  animation-delay: 0.05s;
+}
+
+.testCard:nth-child(2) {
+  animation-delay: 0.1s;
+}
+
+.testCard:nth-child(3) {
+  animation-delay: 0.15s;
+}
+
+.testCard:nth-child(4) {
+  animation-delay: 0.2s;
+}
+
+.testCard:nth-child(5) {
+  animation-delay: 0.25s;
+}
+
+.testCard:hover {
+  background: var(--bg-card-hover);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.testCardHeader {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.statusIcon {
+  font-size: 1.2rem;
+  flex-shrink: 0;
+  width: 28px;
+  text-align: center;
+}
+
+.testLabel {
+  font-weight: 600;
+  font-size: 0.95rem;
+  flex: 1;
+}
+
+.testValue {
+  font-weight: 600;
+  font-size: 0.9rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.testValueGood {
+  color: var(--color-good);
+}
+
+.testValueWarn {
+  color: var(--color-warn);
+}
+
+.testValueBad {
+  color: var(--color-bad);
+}
+
+.testSummary {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-top: var(--space-xs);
+  padding-left: 36px;
+}
+
+.testDetail {
+  margin-top: var(--space-sm);
+  padding: var(--space-sm) var(--space-md);
+  padding-left: 36px;
+  background: var(--bg-primary);
+  border-radius: var(--radius-sm);
+  font-size: 0.78rem;
+  font-family: 'SF Mono', 'Fira Code', monospace;
+  color: var(--text-muted);
+  line-height: 1.6;
+  animation: slideDown 0.3s ease;
+  word-break: break-all;
+}
+
+.testRecommendation {
+  margin-top: var(--space-sm);
+  padding-left: 36px;
+  font-size: 0.82rem;
+  color: var(--color-warn);
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-xs);
+}
+
+.expandHint {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+/* --- Footer --- */
+.footer {
+  margin-top: auto;
+  padding-top: var(--space-2xl);
+  text-align: center;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  animation: fadeIn 1s ease 0.5s both;
+}
+
+.footerLink {
+  color: var(--accent-dim);
+  text-decoration: none;
+}
+
+.footerLink:hover {
+  color: var(--accent);
+  text-decoration: underline;
+}
+
+/* --- Error Banner --- */
+.errorBanner {
+  background: var(--color-bad-bg);
+  border: 1px solid var(--color-bad-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  font-size: 0.9rem;
+  color: var(--color-bad);
+  text-align: center;
+  animation: fadeInUp 0.4s ease;
+}
+
+/* --- Blocker Warning Banner --- */
+.blockerBanner {
+  background: var(--color-warn-bg);
+  border: 1px solid var(--color-warn-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  font-size: 0.85rem;
+  color: var(--color-warn);
+  text-align: center;
+  line-height: 1.5;
+  animation: fadeInUp 0.4s ease;
+}
+
+/* --- Duration Badge --- */
+.duration {
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-top: var(--space-xs);
+}
+
+/* --- Skeleton Loading --- */
+.skeletonCard {
+  cursor: default;
+  opacity: 0.5;
+}
+
+.skeletonCard:hover {
+  background: var(--bg-card);
+  border-color: rgba(255, 255, 255, 0.06);
+}
+
+.skeletonText {
+  display: inline-block;
+  height: 14px;
+  width: 60%;
+  background: linear-gradient(90deg,
+      var(--bg-elevated) 25%,
+      var(--bg-card-hover) 50%,
+      var(--bg-elevated) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: var(--radius-sm);
+}
+
+.skeletonShort {
+  width: 50px;
+}
+
+/* --- Reduced Motion --- */
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* --- Responsive --- */
+@media (max-width: 480px) {
+  .app {
+    padding: var(--space-md);
+    padding-bottom: var(--space-2xl);
+  }
+
+  .header {
+    padding: var(--space-lg) 0 var(--space-md);
+  }
+
+  .logo {
+    font-size: 2rem;
+  }
+
+  .diagnoseBtn {
+    font-size: 1rem;
+    padding: var(--space-sm) var(--space-lg);
+    min-height: 50px;
+  }
+
+  .verdict {
+    padding: var(--space-md);
+  }
+
+  .verdictHeadline {
+    font-size: 1.1rem;
+  }
+
+  .testCard {
+    padding: var(--space-sm) var(--space-md);
+  }
+}
