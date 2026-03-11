@@ -109,7 +109,7 @@ export function trackEvent(
         });
 
         // Send via Beacon API (doesn't block page unload)
-        if (navigator.sendBeacon) {
+        if ('sendBeacon' in navigator) {
             // Replace URL with your analytics endpoint
             // navigator.sendBeacon('/api/telemetry', payload);
             void payload; // no-op until endpoint configured
